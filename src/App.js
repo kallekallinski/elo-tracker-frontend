@@ -91,52 +91,54 @@ function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchAll = async () => {
+    setLoading(true);
+    const results = await Promise.all(
+      PLAYERS.map(async (player) => {
+        try {
+          const res = await fetch(
+            `${API_BASE}/api/summoner?name=${encodeURIComponent(player.name)}&tag=${player.tag}&startTier=${player.startTier}&startDivision=${player.startDivision}&startLP=${player.startLP}`
+          );
+          const json = await res.json();
+
+          return {
+            ...json,
+            startLP: player.startLP,
+            startTier: player.startTier,
+            startDivision: player.startDivision
+          };
+        } catch (err) {
+          return {
+            name: `${player.name}#${player.tag}`,
+            tier: "-",
+            rank: "-",
+            lp: "-",
+            startLP: player.startLP,
+            netGain: "-"
+          };
+        }
+      })
+    );
+
+    results.sort((a, b) => (b.netGain ?? 0) - (a.netGain ?? 0));
+    setData(results);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchAll = async () => {
-      const results = await Promise.all(
-        PLAYERS.map(async (player) => {
-          try {
-            const res = await fetch(
-              `${API_BASE}/api/summoner?name=${encodeURIComponent(player.name)}&tag=${player.tag}&startTier=${player.startTier}&startDivision=${player.startDivision}&startLP=${player.startLP}`
-            );
-            const json = await res.json();
-
-            return {
-              ...json,
-              startLP: player.startLP,
-              startTier: player.startTier,
-              startDivision: player.startDivision
-            };
-          } catch (err) {
-            return {
-              name: `${player.name}#${player.tag}`,
-              tier: "-",
-              rank: "-",
-              lp: "-",
-              startLP: player.startLP,
-              netGain: "-"
-            };
-          }
-        })
-      );
-
-      results.sort((a, b) => (b.netGain ?? 0) - (a.netGain ?? 0));
-      setData(results);
-      setLoading(false);
-    };
-
     fetchAll();
   }, []);
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
       <h1>🔺 ELO Gain Challenge Leaderboard</h1>
+      <button onClick={() => window.location.reload()} style={{ marginBottom: "1rem" }}>🔄 Seite neu laden</button>
       {loading ? (
         <p>Lade Daten...</p>
       ) : (
         <>
           <p style={{ fontStyle: "italic", marginBottom: "1rem" }}>
-            📅 Die Net Gains gelten für den aktuellen Split und werden bis <strong>11. August 2025</strong> gewertet.
+            📅 Die Net Gains gelten für den Zeitraum <strong>ab 22. Mai 2025</strong> bis zum Split-Ende am <strong>11. August 2025</strong>.
           </p>
 
           <table border="1" cellPadding="10">
