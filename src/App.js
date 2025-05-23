@@ -16,7 +16,7 @@ const PLAYERS = [
     tag: "EUW",
     startTier: "DIAMOND",
     startDivision: "III",
-    startLP: 30
+    startLP: 30 // 📅 Startwert vom 18. Mai 2025
   },
   {
     name: "GottloserEnjoyer",
