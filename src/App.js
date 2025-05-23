@@ -16,7 +16,7 @@ const PLAYERS = [
     tag: "EUW",
     startTier: "DIAMOND",
     startDivision: "III",
-    startLP: 30 // 📅 Startwert vom 18. Mai 2025
+    startLP: 30
   },
   {
     name: "GottloserEnjoyer",
@@ -56,6 +56,36 @@ const PLAYERS = [
 ];
 
 const API_BASE = "https://elo-backend.onrender.com";
+
+const HISTORY = [
+  {
+    date: "2025-05-21",
+    Dogwauwau: 32,
+    GottloserEnjoyer: 65,
+    "Norm Alo": 4,
+    "I Am Atomic": 98,
+    "misatos toilet": 25,
+    "SHIFT Keks": 45
+  },
+  {
+    date: "2025-05-22",
+    Dogwauwau: 36,
+    GottloserEnjoyer: 66,
+    "Norm Alo": 6,
+    "I Am Atomic": 99,
+    "misatos toilet": 28,
+    "SHIFT Keks": 46
+  },
+  {
+    date: "2025-05-23",
+    Dogwauwau: 40,
+    GottloserEnjoyer: 68,
+    "Norm Alo": 7,
+    "I Am Atomic": 100,
+    "misatos toilet": 30,
+    "SHIFT Keks": 48
+  }
+];
 
 function App() {
   const [data, setData] = useState([]);
@@ -137,6 +167,27 @@ function App() {
               ))}
             </tbody>
           </table>
+
+          <h2 style={{ marginTop: "3rem" }}>📈 Tagesentwicklung (Net Gain)</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={HISTORY} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              {PLAYERS.map((p, i) => (
+                <Line
+                  key={i}
+                  type="monotone"
+                  dataKey={p.name}
+                  stroke={`hsl(${(i * 60) % 360}, 70%, 50%)`}
+                  strokeWidth={2}
+                  dot={false}
+                />
+              ))}
+            </LineChart>
+          </ResponsiveContainer>
         </>
       )}
     </div>
