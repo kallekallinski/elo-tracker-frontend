@@ -155,7 +155,7 @@ function App() {
             <tbody>
               {data.map((player, i) => (
                 <tr key={i}>
-                  <td>{player.name}</td>
+                  <td>{i === 0 ? "⭐ " : ""}{player.name}</td>
                   <td>{player.tier}</td>
                   <td>{player.rank}</td>
                   <td>{player.lp}</td>
