@@ -32,13 +32,6 @@ const divisionValues = {
 
 const PLAYERS = [
   {
-    name: "Dogwauwau",
-    tag: "EUW",
-    startTier: "DIAMOND",
-    startDivision: "I",
-    startLP: 30
-  },
-  {
     name: "GottloserEnjoyer",
     tag: "FkY0u",
     startTier: "DIAMOND",
@@ -49,13 +42,13 @@ const PLAYERS = [
     name: "Norm Alo",
     tag: "0815",
     startTier: "DIAMOND",
-    startDivision: "III",
+    startDivision: "IV",
     startLP: 3
   },
   {
     name: "I Am Atomic",
     tag: "KERO",
-    startTier: "MASTER",
+    startTier: "DIAMOND",
     startDivision: "I",
     startLP: 97
   },
@@ -69,7 +62,7 @@ const PLAYERS = [
   {
     name: "SHIFT Keks",
     tag: "EUW",
-    startTier: "PLATINUM",
+    startTier: "GOLD",
     startDivision: "IV",
     startLP: 40
   }
