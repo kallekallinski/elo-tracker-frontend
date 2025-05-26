@@ -138,7 +138,8 @@ function App() {
       ) : (
         <>
           <p style={{ fontStyle: "italic", marginBottom: "1rem" }}>
-            📅 Die Net Gains gelten für den Zeitraum <strong>ab 22. Mai 2025</strong> bis zum Split-Ende am <strong>11. August 2025</strong>.
+            📅 Die Net Gains gelten für den Zeitraum <strong>ab 22. Mai 2025</strong> bis zum Split-Ende am <strong>11. August 2025</strong>.<br />
+            🔍 Hinweis: Division-Sprünge werden durch numerische Berechnung des Gesamtscores berücksichtigt.
           </p>
 
           <table border="1" cellPadding="10">
@@ -154,8 +155,8 @@ function App() {
             </thead>
             <tbody>
               {data.map((player, i) => (
-                <tr key={i}>
-                  <td>{i === 0 ? "⭐ " : ""}{player.name}</td>
+                <tr key={i} style={i === 0 ? { fontWeight: "bold", backgroundColor: "#fff7dd" } : {}}>
+                  <td>{player.name} {i === 0 && "⭐"}</td>
                   <td>{player.tier}</td>
                   <td>{player.rank}</td>
                   <td>{player.lp}</td>
