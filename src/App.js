@@ -155,6 +155,12 @@ function App() {
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
       <h1>🔺 ELO Gain Challenge Leaderboard</h1>
+
+      <div style={{ backgroundColor: '#111', color: '#fff', padding: '1rem', marginBottom: '1rem', border: '1px dashed #888', borderRadius: '8px', fontSize: '0.95rem', lineHeight: '1.5' }}>
+        <strong>💀 Net Gain Explained (in braindead detail):</strong><br />
+        Jede Division = 100 LP. Tiers wie Platin, Diamond, Emerald sind reine Zahlenblöcke mit +400er Steps wie in nem kaputten Aufzug. Wir werfen das alles in den Mixer, ignorieren Promos, und spucken dir dann den brutalen Rohwert raus: LP + Div + Tierpunkte. Kein Bullshit. Kein Copium. Wenn du Emerald I mit 23 LP bist, dann hast du genau <code>EMERALD(2000) + I(300) + 23 = 2323</code> Punkte. GG.<br />
+        Wer hardstuck ist, wird’s im Leaderboard spüren. Wer carried, wird glänzen. 
+      </div>
       <button onClick={() => window.location.reload()} style={{ marginBottom: "1rem" }}>🔄 Seite neu laden</button>
       {loading ? (
         <p>Lade Daten...</p>
@@ -162,7 +168,7 @@ function App() {
         <>
           <p style={{ fontStyle: "italic", marginBottom: "1rem" }}>
             📅 Die Net Gains gelten für den Zeitraum <strong>ab 22. Mai 2025</strong> bis zum Split-Ende am <strong>11. August 2025</strong>.<br />
-            📌 Hinweis: Der Net Gain wird basierend auf Tiers, Divisionen und LP berechnet. Jede Division zählt als 100 LP, Tiers unterscheiden sich ebenfalls. Auf- und Abstiege werden vollständig berücksichtigt.
+            📌 Hinweis: Der Net Gain wird basierend auf Tiers, Divisionen und LP berechnet. Und ja, wir haben uns Riot’s wirres Matchmaking geschnappt, es durch einen degenerierten Blender gejagt und unsere eigene Metrik rausgeschwitzt: Jede Division ist fix 100 LP wert. Von IV zu III? +100. Tier-Aufstieg? Instant +400 wie ein biblischer Buff vom Baron höchstpersönlich. Wir addieren LP obendrauf, runden nix ab, ignorieren Promos und behandeln Grandmaster wie Challenger, weil's eh keiner richtig versteht. Das Ergebnis: Ein brachial ehrlicher Score. Wenn du climbst, wirst du belohnt. Wenn du hardstuck bist, sieht's jeder. Willkommen im LP-Labor – wir zählen alles, außer deine Ausreden. Jede Division zählt als 100 LP, Tiers unterscheiden sich ebenfalls. Auf- und Abstiege werden vollständig berücksichtigt.
           </p>
 
           <table border="1" cellPadding="10">
