@@ -62,7 +62,7 @@ const PLAYERS = [
   {
     name: "SHIFT Keks",
     tag: "EUW",
-    startTier: "GOLD",
+    startTier: "EMERALD",
     startDivision: "IV",
     startLP: 40
   }
