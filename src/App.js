@@ -97,15 +97,16 @@ function App() {
       PLAYERS.map(async (player) => {
         try {
           const res = await fetch(
-            `${API_BASE}/api/summoner?name=${encodeURIComponent(player.name)}&tag=${player.tag}&startTier=${player.startTier}&startDivision=${player.startDivision}&startLP=${player.startLP}`
+            `${API_BASE}/api/summoner?name=${encodeURIComponent(player.name)}&tag=${player.tag}`
           );
           const json = await res.json();
+
+          const netGain = (json.lp ?? 0) - (player.startLP ?? 0);
 
           return {
             ...json,
             startLP: player.startLP,
-            startTier: player.startTier,
-            startDivision: player.startDivision
+            netGain
           };
         } catch (err) {
           return {
@@ -139,7 +140,7 @@ function App() {
         <>
           <p style={{ fontStyle: "italic", marginBottom: "1rem" }}>
             📅 Die Net Gains gelten für den Zeitraum <strong>ab 22. Mai 2025</strong> bis zum Split-Ende am <strong>11. August 2025</strong>.<br />
-            🔍 Hinweis: Division-Sprünge werden durch numerische Berechnung des Gesamtscores berücksichtigt.
+            📌 Hinweis: Berechnung nur basierend auf LP – Tiers und Divisionen werden nicht berücksichtigt.
           </p>
 
           <table border="1" cellPadding="10">
@@ -160,7 +161,7 @@ function App() {
                   <td>{player.tier}</td>
                   <td>{player.rank}</td>
                   <td>{player.lp}</td>
-                  <td>{`${player.startTier} ${player.startDivision} ${player.startLP} LP`}</td>
+                  <td>{`${player.startLP} LP`}</td>
                   <td>
                     {typeof player.netGain === "number"
                       ? `${player.netGain >= 0 ? "+" : ""}${player.netGain}`
