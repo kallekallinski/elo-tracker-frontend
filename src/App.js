@@ -10,6 +10,26 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+const tierValues = {
+  IRON: 0,
+  BRONZE: 400,
+  SILVER: 800,
+  GOLD: 1200,
+  PLATINUM: 1600,
+  EMERALD: 2000,
+  DIAMOND: 2400,
+  MASTER: 2800,
+  GRANDMASTER: 3200,
+  CHALLENGER: 3400
+};
+
+const divisionValues = {
+  IV: 0,
+  III: 100,
+  II: 200,
+  I: 300
+};
+
 const PLAYERS = [
   {
     name: "Dogwauwau",
@@ -101,7 +121,9 @@ function App() {
           );
           const json = await res.json();
 
-          const netGain = (json.lp ?? 0) - (player.startLP ?? 0);
+          const startScore = (tierValues[player.startTier] ?? 0) + (divisionValues[player.startDivision] ?? 0) + (player.startLP ?? 0);
+          const currentScore = (tierValues[json.tier] ?? 0) + (divisionValues[json.rank] ?? 0) + (json.lp ?? 0);
+          const netGain = currentScore - startScore;
 
           return {
             ...json,
@@ -140,7 +162,7 @@ function App() {
         <>
           <p style={{ fontStyle: "italic", marginBottom: "1rem" }}>
             📅 Die Net Gains gelten für den Zeitraum <strong>ab 22. Mai 2025</strong> bis zum Split-Ende am <strong>11. August 2025</strong>.<br />
-            📌 Hinweis: Berechnung nur basierend auf LP – Tiers und Divisionen werden nicht berücksichtigt.
+            📌 Hinweis: Der Net Gain wird basierend auf Tiers, Divisionen und LP berechnet. Jede Division zählt als 100 LP, Tiers unterscheiden sich ebenfalls. Auf- und Abstiege werden vollständig berücksichtigt.
           </p>
 
           <table border="1" cellPadding="10">
@@ -161,7 +183,7 @@ function App() {
                   <td>{player.tier}</td>
                   <td>{player.rank}</td>
                   <td>{player.lp}</td>
-                  <td>{`${player.startLP} LP`}</td>
+                  <td>{`${player.startTier} ${player.startDivision} ${player.startLP} LP`}</td>
                   <td>
                     {typeof player.netGain === "number"
                       ? `${player.netGain >= 0 ? "+" : ""}${player.netGain}`
